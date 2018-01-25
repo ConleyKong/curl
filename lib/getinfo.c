@@ -5,7 +5,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2017, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2018, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -253,6 +253,9 @@ static CURLcode getinfo_offt(struct Curl_easy *data, CURLINFO info,
                              curl_off_t *param_offt)
 {
   switch(info) {
+  case CURLINFO_FILETIME_T:
+    *param_offt = (curl_off_t)data->info.filetime;
+    break;
   case CURLINFO_SIZE_UPLOAD_T:
     *param_offt = data->progress.uploaded;
     break;
